@@ -150,8 +150,12 @@ namespace BtcAddress {
                 using (Bitmap b2 = QR.EncodeQRCode(address)) {
                     e.Graphics.DrawImage(b2, thiscodeX + 100, thiscodeY, 100, 100);
                 }
-            
-                e.Graphics.DrawString("Bitcoin address:\r\n" + address, font, Brushes.Black, thiscodeX + 210, thiscodeY);
+
+                if (address[0] == '1') {
+                    e.Graphics.DrawString("Bitcoin address:\r\n" + address, font, Brushes.Black, thiscodeX + 210, thiscodeY);
+                } else {
+                    e.Graphics.DrawString("Litecoin address:\r\n" + address, font, Brushes.Black, thiscodeX + 210, thiscodeY);
+                }
 
                 StringFormat sf = new StringFormat();
                 sf.Alignment = StringAlignment.Far; // right justify

@@ -92,7 +92,7 @@ namespace BtcAddress {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
-            Application.Run(new BtcAddress.Forms.KeyCollectionView());
+            Application.Run(new BtcAddress.Forms.CryptoVest());
         }
     }
 }

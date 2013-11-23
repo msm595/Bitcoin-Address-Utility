@@ -1,3 +1,5 @@
+Based on https://github.com/casascius/Bitcoin-Address-Utility
+
 This project has two dependencies:
 
 1. the BouncyCastle Crypto library.

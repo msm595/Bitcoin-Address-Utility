@@ -33,7 +33,7 @@ namespace Casascius.Bitcoin {
 
     public class MiniKeyPair : KeyPair {
 		
-        public static MiniKeyPair CreateDeterministic(string seed) {
+        public static MiniKeyPair CreateDeterministic(string seed, byte addressType = 0) {
 
             // flow:
             // 1. take SHA256 of seed to yield 32 bytes
@@ -79,7 +79,7 @@ namespace Casascius.Bitcoin {
                     }
                 }
             }
-            return new MiniKeyPair(new String(chars));
+            return new MiniKeyPair(new String(chars), addressType);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Casascius.Bitcoin {
         /// Entropy is taken from .NET's SecureRandom, the system clock,
         /// and any optionally provided salt.
         /// </summary>
-        public static MiniKeyPair CreateRandom(string usersalt) {
+        public static MiniKeyPair CreateRandom(string usersalt, byte addressType = 0) {
             if (usersalt == null) usersalt = "ok, whatever";
             usersalt += DateTime.UtcNow.Ticks.ToString();
             SecureRandom sr = new SecureRandom();
@@ -95,11 +95,12 @@ namespace Casascius.Bitcoin {
             for (int i = 0; i < 64; i++) {
                 chars[i] = (char)(32 + (sr.NextInt() % 64));
             }
-            return CreateDeterministic(usersalt + new String(chars));
+            return CreateDeterministic(usersalt + new String(chars), addressType);
         }
 
 
-        public MiniKeyPair(string key) {
+        public MiniKeyPair(string key, byte addressType = 0) {
+            _addressType = addressType;
             MiniKey = key;
         }
 
